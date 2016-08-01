@@ -32,6 +32,7 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
+        user = user.get_current_user()
         template = jinja_environment.get_template('templates/listener.html')
         self.response.write(template.render())
 
@@ -41,9 +42,9 @@ class ListenerHandler(webapp2.RequestHandler):
             self.error(500)
             return
         new_listener = Listener(
-            listener_first = self.request.get('first_name')
-            listener_last = self.request.get('last_name')
-            favorite_genre = self.request.get('fave_genre')
+            listener_first = self.request.get('first_name'),
+            listener_last = self.request.get('last_name'),
+            favorite_genre = self.request.get('fave_genre'),
             id = user.user_id()
         )
         listener_info = {
@@ -56,6 +57,7 @@ class ListenerHandler(webapp2.RequestHandler):
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
+        user = user.get_current_user()
         template = jinja_environment.get_template('templates/artist.html')
         self.response.write(template.render())
 
@@ -65,12 +67,12 @@ class ArtistHandler(webapp2.RequestHandler):
             self.error(500)
             return
         new_artist = Artist(
-            artist_first = self.request.get('a_first')
-            artist_last = self.request.get('a_last')
-            stage_name = self.request.get('a_stage_name')
-            hometown = self.request.get('a_hometown')
-            genre = self.request.get('a_genre')
-            bio = self.request.get('a_bio')
+            artist_first = self.request.get('a_first'),
+            artist_last = self.request.get('a_last'),
+            stage_name = self.request.get('a_stage_name'),
+            hometown = self.request.get('a_hometown'),
+            genre = self.request.get('a_genre'),
+            bio = self.request.get('a_bio'),
             id = user.user_id()
         )
         artist_info = {
