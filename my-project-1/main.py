@@ -41,8 +41,8 @@ class ListenerHandler(webapp2.RequestHandler):
         listener_last = self.request.get('last_name')
         favorite_genre = self.request.get('fave_genre')
         listener_info = {
-            'listener_first': listener_first
-            'listener_last': listener_last
+            'listener_first': listener_first,
+            'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
         template = jinja_environment.get_template('templates/listener-registration.html')
