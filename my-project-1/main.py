@@ -15,6 +15,8 @@ class Artist(ndb.Model):
     artist_first = ndb.StringProperty()
     artist_last = ndb.StringProperty()
     stage_name = ndb.StringProperty()
+    hometown = ndb.StringProperty()
+    genre = ndb.StringProperty()
     bio = ndb.StringProperty()
 
 
@@ -30,20 +32,35 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
-        artist1 = "this is my favorite artist"
-        fav_artists = {
-            'artist1': artist1
-        
-        }
         template = jinja_environment.get_template('templates/listener.html')
-        self.response.write(template.render(fav_artists))
+        self.response.write(template.render())
 
 
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
-       template = jinja_environment.get_template('templates/artist.html')
-       self.response.write("This is the Artist Page!")
+        template = jinja_environment.get_template('templates/artist.html')
+        self.response.write(template.render())
+
+    def post(self):
+        artist_first = self.request.get('a_first')
+        artist_last = self.request.get('a_last')
+        stage_name = self.request.get('a_stage_name')
+        hometown = self.request.get('a_hometown')
+        genre = self.request.get('a_genre')
+        bio = self.request.get('a_bio')
+        artist_info = {
+            'artist_first': artist_first,
+            'artist_last': artist_last,
+            'stage_name': stage_name,
+            'hometown': hometown,
+            'genre': genre,
+            'bio': bio
+        }
+        template = jinja_environment.get_template('templates/artist.html')
+        self.response.write(template.render(artist_info))
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
