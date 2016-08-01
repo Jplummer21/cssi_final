@@ -32,8 +32,6 @@ class Artist(ndb.Model):
     artist_last = ndb.StringProperty()
     stage_name = ndb.StringProperty()
     bio = ndb.StringProperty()
-    
-
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
