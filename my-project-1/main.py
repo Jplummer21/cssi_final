@@ -10,6 +10,7 @@ jinja_environment = jinja2.Environment(loader=
 class Listener(ndb.Model):
     listener_first = ndb.StringProperty()
     listener_last = ndb.StringProperty()
+    favorite_genre = ndb.StringProperty()
 
 class Artist(ndb.Model):
     artist_first = ndb.StringProperty()
@@ -35,6 +36,10 @@ class ListenerHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/listener.html')
         self.response.write(template.render())
 
+    def post(self):
+        listener_first = self.request.get('first_name')
+        listener_last = self.request.get('last_name')
+        favorite_genre = self.request.get('fave_genre')
 
 
 class ArtistHandler(webapp2.RequestHandler):
