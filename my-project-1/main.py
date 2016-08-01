@@ -15,11 +15,22 @@
 # limitations under the License.
 #
 import webapp2
+import os
+import jinja2
+from google.appengine.api import users
+from google.appengine.ext import ndb
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Hello world!')
 
+class ListenerHandler(webapp2.RequestHandler):
+
+
+class ArtistHandler(webapp2.RequestHandler):
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/listener', ListenerHandler)
+    ('/artist', ArtistHandler)
 ], debug=True)
