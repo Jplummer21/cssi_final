@@ -23,6 +23,15 @@ from google.appengine.ext import ndb
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
+class Listener(ndb.Model):
+    listener_first = ndb.StringProperty()
+    listener_last = ndb.StringProperty()
+
+class Artist(ndb.Model):
+    artist_first = ndb.StringProperty()
+    artist_last = ndb.StringProperty()
+    stage_name = ndb.StringProperty()
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
