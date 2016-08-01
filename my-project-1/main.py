@@ -30,8 +30,14 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
+        artist1 = "this is my favorite artist"
+        fav_artists = {
+            'artist1': artist1
+        
+        }
         template = jinja_environment.get_template('templates/listener.html')
-        self.response.write("This is the Listener Page!")
+        self.response.write(template.render(fav_artists))
+
 
 
 class ArtistHandler(webapp2.RequestHandler):
