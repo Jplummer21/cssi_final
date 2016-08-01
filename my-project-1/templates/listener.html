@@ -1,9 +1,11 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="../stylesheets/style_login.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"> </script>
+  <script src="/js/propic.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/listener.css">
 </head>
 <body>
-  <h1> Welcome to NoTreble!<h1>
+  <h1> Welcome to No Treble!<h1>
   <h2> Create your profile and start finding new artists!<h2>
     <form method="post">
       <p>First name <input type = "text" name = "first_name" placeholder="Enter your First Name"/></p>
@@ -11,5 +13,8 @@
       <p>Favorite Genre <input type = "text" name = "fave_genre" placeholder="Enter your Favorite Genre"/></p>
         <button>Submit</button>
     </form>
+    <img class="profile-pic" src="http://simpleicon.com/wp-content/uploads/music-note-1.png" />
+    <div class="upload-button">Upload Profile Picture</div>
+    <input class="file-upload" type="file" accept="image/*"/>
 </body>
 </html>
