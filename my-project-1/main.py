@@ -57,7 +57,7 @@ class ArtistHandler(webapp2.RequestHandler):
             'genre': genre,
             'bio': bio
         }
-        template = jinja_environment.get_template('templates/artist.html')
+        template = jinja_environment.get_template('templates/artist-registration.html')
         self.response.write(template.render(artist_info))
 
 
