@@ -41,9 +41,9 @@ class ListenerHandler(webapp2.RequestHandler):
             self.error(500)
             return
         new_listener = Listener(
-            listener_first = self.request.get('first_name')
-            listener_last = self.request.get('last_name')
-            favorite_genre = self.request.get('fave_genre')
+            listener_first = self.request.get('first_name'),
+            listener_last = self.request.get('last_name'),
+            favorite_genre = self.request.get('fave_genre'),
             id = user.user_id()
         )
         listener_info = {
