@@ -32,7 +32,7 @@ class Artist(ndb.Model):
     artist_last = ndb.StringProperty()
     stage_name = ndb.StringProperty()
     bio = ndb.StringProperty()
-    
+
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -47,14 +47,14 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('')
-        self.response.write(template.render())
+        template = jinja_environment.get_template('templates/listener.html')
+        self.response.write("This is the Listener Page!")
 
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
-       template = jinja_environment.get_template('')
-       self.response.write(template.render())
+       template = jinja_environment.get_template('templates/artist.html')
+       self.response.write("This is the Artist Page!")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
