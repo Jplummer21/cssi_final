@@ -50,7 +50,7 @@ class ListenerHandler(webapp2.RequestHandler):
             'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
-        template = jinja_environment.get_template('templates/listener-registration.html')
+        template = jinja_environment.get_template('templates/listener-output.html')
         self.response.write(template.render(listener_info))
 
 class ArtistHandler(webapp2.RequestHandler):
@@ -79,7 +79,7 @@ class ArtistHandler(webapp2.RequestHandler):
             'genre': genre,
             'bio': bio
         }
-        template = jinja_environment.get_template('templates/artist-registration.html')
+        template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))
 
 app = webapp2.WSGIApplication([
