@@ -60,8 +60,12 @@ class ListenerHandler(webapp2.RequestHandler):
             'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
+
+        template = jinja_environment.get_template('templates/listener-output.html')
+
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener-registration.html')
+
         self.response.write(template.render(listener_info))
 
 class ArtistHandler(webapp2.RequestHandler):
@@ -93,8 +97,11 @@ class ArtistHandler(webapp2.RequestHandler):
             'bio': bio,
             'soundcloud': soundcloud
         }
+
+        template = jinja_environment.get_template('templates/artist_output.html')
         artist_key = new_artist.put()
         template = jinja_environment.get_template('templates/artist-registration.html')
+
         self.response.write(template.render(artist_info))
 
 app = webapp2.WSGIApplication([
