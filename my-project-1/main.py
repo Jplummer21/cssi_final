@@ -97,12 +97,11 @@ class ArtistHandler(webapp2.RequestHandler):
             'bio': bio,
             'soundcloud': soundcloud
         }
-<<<<<<< HEAD
+
         template = jinja_environment.get_template('templates/artist_output.html')
-=======
         artist_key = new_artist.put()
         template = jinja_environment.get_template('templates/artist-registration.html')
->>>>>>> 501dd66172ff693745ac48162f4b8acac501cf6c
+
         self.response.write(template.render(artist_info))
 
 app = webapp2.WSGIApplication([
