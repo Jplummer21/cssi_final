@@ -35,8 +35,10 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         user_value = self.request.get('user_type')
         template_val = 'templates/' + user_value + '.html'
+        url_val = '/' + user_value
         template = jinja_environment.get_template(template_val)
         self.response.write(template.render({'user_value': user_value}))
+        self.redirect(url_val)
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
@@ -44,6 +46,7 @@ class ListenerHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
     def post(self):
+        user = users.get_current_user()
         if not user:
             self.error(500)
             return
@@ -63,6 +66,7 @@ class ListenerHandler(webapp2.RequestHandler):
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         template = jinja_environment.get_template('templates/artist.html')
         self.response.write(template.render())
 
