@@ -7,9 +7,8 @@
   </head>
   <body>
     <h1>NoTreble</h1>
-    <h1>{{ greeting }}</h1>
+    <button type = "submit" name="greeting">{{ greeting }}</button><br/>
     <form method="post" action={{ user_value }}>
-      <button type = "submit">Sign In!</button><br/>
       <input type="radio" name="user_type" value="artist"/>Artist<br/>
       <input type="radio" name="user_type" value="listener"/>Listener<br/>
       <button type = "submit">Sign Up!</button>
