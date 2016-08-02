@@ -60,12 +60,12 @@ class ListenerHandler(webapp2.RequestHandler):
             'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
-<<<<<<< HEAD
+
         template = jinja_environment.get_template('templates/listener-output.html')
-=======
+
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener-registration.html')
->>>>>>> 501dd66172ff693745ac48162f4b8acac501cf6c
+
         self.response.write(template.render(listener_info))
 
 class ArtistHandler(webapp2.RequestHandler):
