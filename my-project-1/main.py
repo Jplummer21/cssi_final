@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 import webapp2
 import os
 import jinja2
@@ -49,20 +51,25 @@ class ListenerHandler(webapp2.RequestHandler):
         if not user:
             self.error(500)
             return
-        new_listener = Listener(
-            listener_first = self.request.get('first_name'),
-            listener_last = self.request.get('last_name'),
-            favorite_genre = self.request.get('fave_genre'),
-            id = user.user_id()
-        )
-        listener_info = {
+        listener_first = self.request.get('first_name')
+        listener_last = self.request.get('last_name')
+        favorite_genre = self.request.get('fave_genre')
+        test = "test"
+        listener_record = {
             'listener_first': listener_first,
             'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
+        print listener_record
+        new_listener = Listener(
+            listener_first=listener_first,
+            listener_last=listener_last,
+            favorite_genre=favorite_genre,
+            id = user.user_id()
+        )
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener_output.html')
-        self.response.write(template.render(listener_info))
+        self.response.write(template.render(listener_record))
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
