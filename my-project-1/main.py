@@ -41,11 +41,11 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
         template = jinja_environment.get_template('templates/listener.html')
         self.response.write(template.render())
 
     def post(self):
+        user = users.get_current_user()
         if not user:
             self.error(500)
             return
@@ -66,11 +66,11 @@ class ListenerHandler(webapp2.RequestHandler):
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
         template = jinja_environment.get_template('templates/artist.html')
         self.response.write(template.render())
 
     def post(self):
+        user = users.get_current_user()
         if not user:
             self.error(500)
             return
