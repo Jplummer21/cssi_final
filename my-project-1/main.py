@@ -1,5 +1,6 @@
 import webapp2
 import os
+import logging
 import jinja2
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -33,6 +34,9 @@ class MainHandler(webapp2.RequestHandler):
 
     def post(self):
         user_value = self.request.get('user_type')
+        template_val = 'templates/' + user_value + '.html'
+        template = jinja_environment.get_template(template_val)
+        self.response.write(template.render({'user_value': user_value}))
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
@@ -73,6 +77,7 @@ class ArtistHandler(webapp2.RequestHandler):
             hometown = self.request.get('a_hometown'),
             genre = self.request.get('a_genre'),
             bio = self.request.get('a_bio'),
+            soundcloud = self.request.get('a_soundcloud'),
             id = user.user_id()
         )
         artist_info = {
@@ -81,7 +86,8 @@ class ArtistHandler(webapp2.RequestHandler):
             'stage_name': stage_name,
             'hometown': hometown,
             'genre': genre,
-            'bio': bio
+            'bio': bio,
+            'soundcloud': soundcloud
         }
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))

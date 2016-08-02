@@ -8,12 +8,11 @@
   <body>
     <h1>NoTreble</h1>
     <h1>{{ greeting }}</h1>
-    <form>
+    <form method="post" action={{ user_value }}>
       <input type="radio" name="user_type" value="artist"/>Artist<br/>
       <input type="radio" name="user_type" value="listener"/>Listener<br/>
-    <form action="/artist">
       <button type = "submit">Sign In!</button>
       <button type = "submit">Sign Up!</button>
-  </form>
+    </form>
   </body>
 </html>
