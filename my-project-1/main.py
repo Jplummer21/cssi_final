@@ -5,6 +5,7 @@ import os
 import jinja2
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.ext import db
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -21,6 +22,7 @@ class Artist(ndb.Model):
     hometown = ndb.StringProperty()
     genre = ndb.StringProperty()
     bio = ndb.StringProperty()
+    soundcloud = ndb.LinkProperty()
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -54,13 +56,13 @@ class ListenerHandler(webapp2.RequestHandler):
         listener_first = self.request.get('first_name')
         listener_last = self.request.get('last_name')
         favorite_genre = self.request.get('fave_genre')
-        test = "test"
+
         listener_record = {
             'listener_first': listener_first,
             'listener_last': listener_last,
             'favorite_genre': favorite_genre
         }
-        print listener_record
+
         new_listener = Listener(
             listener_first=listener_first,
             listener_last=listener_last,
@@ -81,16 +83,14 @@ class ArtistHandler(webapp2.RequestHandler):
         if not user:
             self.error(500)
             return
-        new_artist = Artist(
-            artist_first = self.request.get('a_first'),
-            artist_last = self.request.get('a_last'),
-            stage_name = self.request.get('a_stage_name'),
-            hometown = self.request.get('a_hometown'),
-            genre = self.request.get('a_genre'),
-            bio = self.request.get('a_bio'),
-            soundcloud = self.request.get('a_soundcloud'),
-            id = user.user_id()
-        )
+        artist_first = self.request.get('a_first')
+        artist_last = self.request.get('a_last')
+        stage_name = self.request.get('a_stage_name')
+        hometown = self.request.get('a_hometown')
+        genre = self.request.get('a_genre')
+        bio = self.request.get('a_bio')
+        soundcloud = self.request.get('a_soundcloud')
+
         artist_info = {
             'artist_first': artist_first,
             'artist_last': artist_last,
@@ -100,6 +100,17 @@ class ArtistHandler(webapp2.RequestHandler):
             'bio': bio,
             'soundcloud': soundcloud
         }
+
+        new_artist = Artist(
+            artist_first = artist_first,
+            artist_last = artist_last,
+            stage_name = stage_name,
+            hometown = hometown,
+            genre = genre,
+            bio = bio,
+            soundcloud = soundcloud,
+            id = user.user_id()
+        )
 
         artist_key = new_artist.put()
         template = jinja_environment.get_template('templates/artist_output.html')
