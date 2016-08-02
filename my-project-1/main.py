@@ -28,7 +28,7 @@ class MainHandler(webapp2.RequestHandler):
             email_address = user.nickname()
             greeting = ('Welcome %s! (<a href="%s">Sign Out</a>)') % (user.nickname(), users.create_logout_url('/'))
         else:
-            greeting = ('<a href="%s">Sign in or register</a>.') % users.create_login_url('/')
+            greeting = ('<a href="%s">Sign In!</a>') % users.create_login_url('/')
         template = jinja_environment.get_template('templates/forms.html')
         self.response.write(template.render({'greeting': greeting}))
 
@@ -42,11 +42,11 @@ class MainHandler(webapp2.RequestHandler):
 
 class ListenerHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         template = jinja_environment.get_template('templates/listener.html')
         self.response.write(template.render())
 
     def post(self):
-        user = users.get_current_user()
         if not user:
             self.error(500)
             return
