@@ -113,11 +113,18 @@ class ArtistHandler(webapp2.RequestHandler):
         )
 
         artist_key = new_artist.put()
+        # template = jinja_environment.get_template('templates/artist_output.html')
+        # self.response.write(template.render(artist_info))
+
+class ArtistPage(webapp2.RequestHandler):
+    def get(self):
         template = jinja_environment.get_template('templates/artist_output.html')
-        self.response.write(template.render(artist_info))
+        self.response.write(template.render())
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/listener', ListenerHandler),
-    ('/artist', ArtistHandler)
+    ('/createartist', ArtistHandler),
+    ('/getartist', ArtistPage)
 ], debug=True)
