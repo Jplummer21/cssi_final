@@ -112,7 +112,7 @@ class ArtistHandler(webapp2.RequestHandler):
             stage_name = stage_name,
             hometown = hometown,
             genre = genre,
-            bio = bio,
+            bio = bio)
             # soundcloud = soundcloud,
             # id = user.user_id()
         artist_key = new_artist.put()
