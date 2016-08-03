@@ -39,11 +39,9 @@ class MainHandler(webapp2.RequestHandler):
         user_value = self.request.get('user_type')
         template_val = 'templates/' + user_value + '.html'
         if user_value == 'artist':
-            url_val = '/createartist'
+            url_val = '/create' + user_value
         elif user_value == 'listener':
             url_val = '/' + user_value
-        else:
-            pass
         template = jinja_environment.get_template(template_val)
         self.response.write(template.render({'user_value': user_value}))
         self.redirect(url_val)
@@ -120,19 +118,12 @@ class ArtistHandler(webapp2.RequestHandler):
         artist_key = new_artist.put()
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))
+        self.redirect('/getartist')
 
 class ArtistPage(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render())
-
-    def post(self):
-        template_val = 'templates/artist.html'
-        url_val = '/' + user.id()
-        template = jinja_environment.get_template(template_val)
-        self.response.write(template.render())
-        self.redirect(url_val)
-
 
 
 app = webapp2.WSGIApplication([
