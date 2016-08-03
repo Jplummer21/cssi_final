@@ -38,7 +38,12 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         user_value = self.request.get('user_type')
         template_val = 'templates/' + user_value + '.html'
-        url_val = '/' + user_value
+        if user_value == 'artist':
+            url_val = '/createartist'
+        elif user_value == 'listener':
+            url_val = '/' + user_value
+        else:
+            pass
         template = jinja_environment.get_template(template_val)
         self.response.write(template.render({'user_value': user_value}))
         self.redirect(url_val)
@@ -67,7 +72,7 @@ class ListenerHandler(webapp2.RequestHandler):
             listener_first=listener_first,
             listener_last=listener_last,
             favorite_genre=favorite_genre,
-            id = user.user_id()
+            # id = user.user_id()
         )
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener_output.html')
@@ -109,17 +114,25 @@ class ArtistHandler(webapp2.RequestHandler):
             genre = genre,
             bio = bio,
             # soundcloud = soundcloud,
-            id = user.user_id()
+            # id = user.user_id()
         )
 
         artist_key = new_artist.put()
-        # template = jinja_environment.get_template('templates/artist_output.html')
-        # self.response.write(template.render(artist_info))
+        template = jinja_environment.get_template('templates/artist_output.html')
+        self.response.write(template.render(artist_info))
 
 class ArtistPage(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render())
+
+    def post(self):
+        template_val = 'templates/artist.html'
+        url_val = '/' + user.id()
+        template = jinja_environment.get_template(template_val)
+        self.response.write(template.render())
+        self.redirect(url_val)
+
 
 
 app = webapp2.WSGIApplication([
