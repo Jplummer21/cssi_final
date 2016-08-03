@@ -22,7 +22,7 @@ class Artist(ndb.Model):
     hometown = ndb.StringProperty()
     genre = ndb.StringProperty()
     bio = ndb.StringProperty()
-    # soundcloud = ndb.LinkProperty()
+    soundcloud = ndb.StringProperty()
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -98,7 +98,7 @@ class ArtistHandler(webapp2.RequestHandler):
             'hometown': hometown,
             'genre': genre,
             'bio': bio,
-            # 'soundcloud': soundcloud
+            'soundcloud': soundcloud
         }
 
         new_artist = Artist(
@@ -108,7 +108,7 @@ class ArtistHandler(webapp2.RequestHandler):
             hometown = hometown,
             genre = genre,
             bio = bio,
-            # soundcloud = soundcloud,
+            soundcloud = soundcloud,
             id = user.user_id()
         )
 
