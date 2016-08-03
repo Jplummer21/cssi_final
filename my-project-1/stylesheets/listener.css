@@ -1,6 +1,10 @@
 body{
-  background-color: #FFFAF0;
+  background-image: url("profile-background.jpg");
 }
+
+form {margin-top: 10%;
+      margin-right: 30%;
+      margin-left: 30%;}
 
 .search {
   width: 130px;

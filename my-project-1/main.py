@@ -101,7 +101,7 @@ class ArtistHandler(webapp2.RequestHandler):
             'hometown': hometown,
             'genre': genre,
             'bio': bio,
-            'soundcloud': soundcloud
+            # 'soundcloud': soundcloud
         }
 
         new_artist = Artist(
@@ -110,13 +110,15 @@ class ArtistHandler(webapp2.RequestHandler):
             stage_name = stage_name,
             hometown = hometown,
             genre = genre,
-            bio = bio,
-            # soundcloud = soundcloud,
+            bio = bio)
+            # soundcloud = soundcloud)
             # id = user.user_id()
         artist_key = new_artist.put()
+        new_artist = artist_key.get()
+        url_string = artist_key.urlsafe()
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))
-        self.redirect('/getartist')
+        self.redirect('/getartist/' + url_string)
 
 class ArtistPage(webapp2.RequestHandler):
     def get(self):
@@ -128,5 +130,5 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/listener', ListenerHandler),
     ('/createartist', ArtistHandler),
-    ('/getartist', ArtistPage)
+    ('/getartist/.*', ArtistPage)
 ], debug=True)
