@@ -87,6 +87,56 @@ class ListenerHandler(webapp2.RequestHandler):
             artist_link = artist_query.fetch()
             for x in artist_link:
                 self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Jazz':
+            artist_query = Artist.query().filter(Artist.genre == 'Jazz')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Hip-Hop':
+            artist_query = Artist.query().filter(Artist.genre == 'Hip-Hop')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'R&B':
+            artist_query = Artist.query().filter(Artist.genre == 'R&B')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Pop':
+            artist_query = Artist.query().filter(Artist.genre == 'Pop')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Country':
+            artist_query = Artist.query().filter(Artist.genre == 'Country')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Classical':
+            artist_query = Artist.query().filter(Artist.genre == 'Classical')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'EDM':
+            artist_query = Artist.query().filter(Artist.genre == 'EDM')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Alternative':
+            artist_query = Artist.query().filter(Artist.genre == 'Alternative')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Dubstep':
+            artist_query = Artist.query().filter(Artist.genre == 'Dubstep')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
+        elif favorite_genre == 'Rock':
+            artist_query = Artist.query().filter(Artist.genre == 'Rock')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
