@@ -6,6 +6,10 @@ input[type=text] {
   border: 2px solid black;
 }
 
+input[type="submit"]:active {
+  background-image: url("profile-background.jpg");
+}
+
 button {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
