@@ -142,8 +142,8 @@ class ArtistPage(webapp2.RequestHandler):
         # content = Artist.all()
 # class ArtistPage(webapp2.RequestHandler):
 #     def get(self):
-#         template = jinja_environment.get_template('templates/artist_output.html')
-#         self.response.write(template.render())
+        template = jinja_environment.get_template('templates/artist_output.html')
+        self.response.write(template.render())
 #
 #     def post(self):
 #         template_val = 'templates/artist.html'
