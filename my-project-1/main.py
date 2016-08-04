@@ -3,6 +3,7 @@
 import webapp2
 import os
 import jinja2
+import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -38,9 +39,11 @@ class MainHandler(webapp2.RequestHandler):
         user_value = self.request.get('user_type')
         template_val = 'templates/' + user_value + '.html'
         if user_value == 'artist':
-            url_val = '/create' + user_value
+            url_val = '/createartist'
         elif user_value == 'listener':
             url_val = '/' + user_value
+        else:
+            pass
         template = jinja_environment.get_template(template_val)
         self.response.write(template.render({'user_value': user_value}))
         self.redirect(url_val)
@@ -73,7 +76,17 @@ class ListenerHandler(webapp2.RequestHandler):
         )
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener_output.html')
+        # template_values = {
+        #     'listener': listener_record,
+        #     'artist': artist_record, #somehow, get this info from the datastore.
+        # }
+
         self.response.write(template.render(listener_record))
+        if favorite_genre == 'Rap':
+            artist_query = Artist.query().filter(Artist.genre == 'Rap')
+            artist_link = artist_query.fetch()
+            for x in artist_link:
+                self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
@@ -118,7 +131,6 @@ class ArtistHandler(webapp2.RequestHandler):
         url_string = artist_key.urlsafe()
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))
-        self.redirect('/getartist/' + url_string)
 
 class ArtistPage(webapp2.RequestHandler):
     def get(self):
@@ -128,13 +140,45 @@ class ArtistPage(webapp2.RequestHandler):
         # new_artist = key.get()
         # # artist_id =
         # content = Artist.all()
+# class ArtistPage(webapp2.RequestHandler):
+#     def get(self):
+#         template = jinja_environment.get_template('templates/artist_output.html')
+#         self.response.write(template.render())
+#
+#     def post(self):
+#         template_val = 'templates/artist.html'
+#         url_val = '/' + user.id()
+#         template = jinja_environment.get_template(template_val)
+#         self.response.write(template.render())
+#         self.redirect(url_val)
+
+class Redirect(webapp2.RequestHandler):
+    def get(self, artist_id):
+        artist_id = int(artist_id)
+
+        artist_info = ndb.Key('Artist', long(artist_id)).get()
+        artist_info = {
+            'artist_first': artist_info.artist_first,
+            'artist_last': artist_info.artist_last,
+            'stage_name': artist_info.stage_name,
+            'hometown': artist_info.hometown,
+            'genre': artist_info.genre,
+            'bio': artist_info.bio,
+            'soundcloud': artist_info.soundcloud
+        }
+        template = jinja_environment.get_template('templates/output.html')
+        # self.response.write(template.render(artist_link))
         template = jinja_environment.get_template('templates/artist_output.html')
-        self.response.write(template.render())
+        self.response.write(template.render(artist_info))
+
+
+
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/listener', ListenerHandler),
     ('/createartist', ArtistHandler),
-    ('/getartist/.*', ArtistPage)
+    # ('/getartist', ArtistPage),
+    ('/artist/([0-9]+)', Redirect)
 ], debug=True)

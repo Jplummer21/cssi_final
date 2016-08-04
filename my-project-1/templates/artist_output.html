@@ -5,12 +5,16 @@
   <script type='text/javascript' src='http://connect.soundcloud.com/sdk.js'></script>
   <script type='text/javascript' src='https://w.soundcloud.com/player/api.js'></script>
   <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script> -->
-<style>
-  body {background-color: #FFF8DC;
-        text-align:center;}
-</style>
+  <style>
+    body {
+          background-image: url(background-image.jpg);
+          text-align: center;
+        }
+  </style>
 </head>
 <body>
+  <h1>Here is your Artist Profile Page!</h1>
+  <h3>This is what your listeners should see</h3>
   <p> {{ artist_first }}
       {{ artist_last }} </p>
   <p> {{ stage_name }} </p>
@@ -19,14 +23,14 @@
   <p> {{ bio }} </p>
 
   <a href=" {{ soundcloud }}">Soundcloud</a></center>
-  <p id="demo"></p>
+  <!-- <p id="demo"></p>
 
 <script>
 function myFunction() {
     var x = location.pathname;
     document.getElementById("demo").innerHTML = x;
 }
-</script>
+</script> -->
 
 
 </body>
