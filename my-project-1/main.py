@@ -6,7 +6,6 @@ import jinja2
 import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
-from google.appengine.ext import db
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -173,17 +172,28 @@ class ArtistHandler(webapp2.RequestHandler):
             stage_name = stage_name,
             hometown = hometown,
             genre = genre,
-            bio = bio)
-            # soundcloud = soundcloud,
+            bio = bio,
+            soundcloud = soundcloud)
             # id = user.user_id()
         artist_key = new_artist.put()
+        new_artist = artist_key.get()
+        # ident = str(artist_key.id())
+        url_string = artist_key.urlsafe()
         template = jinja_environment.get_template('templates/artist_output.html')
         self.response.write(template.render(artist_info))
 
+class ArtistPage(webapp2.RequestHandler):
+    def get(self):
+        # artist_url = self.request.url
+        # # url = urlparse(artist_url)
+        # key = ndb.Key(urlsafe=artist_url)
+        # new_artist = key.get()
+        # # artist_id =
+        # content = Artist.all()
 # class ArtistPage(webapp2.RequestHandler):
 #     def get(self):
-#         template = jinja_environment.get_template('templates/artist_output.html')
-#         self.response.write(template.render())
+        template = jinja_environment.get_template('templates/artist_output.html')
+        self.response.write(template.render())
 #
 #     def post(self):
 #         template_val = 'templates/artist.html'
