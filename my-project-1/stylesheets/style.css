@@ -2,3 +2,7 @@ body {
   color: white;
   background-image: url("homepage-background2.jpg");
 }
+
+label {
+  font-size: 30px;
+}
