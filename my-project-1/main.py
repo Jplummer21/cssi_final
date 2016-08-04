@@ -88,7 +88,6 @@ class ListenerHandler(webapp2.RequestHandler):
             for x in artist_link:
                 self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
 
-
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/artist.html')
