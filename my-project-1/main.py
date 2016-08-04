@@ -85,7 +85,7 @@ class ListenerHandler(webapp2.RequestHandler):
         artist_query = Artist.query().filter(Artist.genre == 'Rap')
         artist_link = artist_query.fetch()
         for x in artist_link:
-            self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.artist_first + '</a>' + '</p>')
+            self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.stage_name + '</a>' + '</p>')
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
