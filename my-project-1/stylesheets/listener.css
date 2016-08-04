@@ -3,6 +3,10 @@ body{
   background-image: url("profile-background.jpg");
 }
 
+h2 {
+  font-size: 16px;
+}
+
 input[type=text] {
   border: 2px solid black;
 }
