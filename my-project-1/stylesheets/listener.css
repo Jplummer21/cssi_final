@@ -2,6 +2,10 @@ body{
   background-image: url("profile-background.jpg");
 }
 
+input[type=text] {
+  border: 2px solid black;
+}
+
 form {margin-top: 10%;
       margin-right: 30%;
       margin-left: 30%;}

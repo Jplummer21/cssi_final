@@ -1,5 +1,9 @@
 body {
-  background-img: url("profile-background.jpg");
+  background-image: url("profile-background.jpg");
+}
+
+input[type=text] {
+  border: 2px solid black;
 }
 
 button {
