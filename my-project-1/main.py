@@ -76,7 +76,17 @@ class ListenerHandler(webapp2.RequestHandler):
         )
         listener_key = new_listener.put()
         template = jinja_environment.get_template('templates/listener_output.html')
+        # template_values = {
+        #     'listener': listener_record,
+        #     'artist': artist_record, #somehow, get this info from the datastore.
+        # }
+
         self.response.write(template.render(listener_record))
+        artist_query = Artist.query().filter(Artist.genre == 'Rap')
+        artist_link = artist_query.fetch()
+        for x in artist_link:
+            self.response.write('<p><a href = "artist/' + str(x.key.id()) + '">'  + x.artist_first + '</a>' + '</p>')
+
 
 class ArtistHandler(webapp2.RequestHandler):
     def get(self):
@@ -131,11 +141,26 @@ class ArtistPage(webapp2.RequestHandler):
         self.response.write(template.render())
         self.redirect(url_val)
 
+class Redirect(webapp2.RequestHandler):
+    def get(self, artist_id):
+        artist_id = int(artist_id)
+        artist_query = Artist.get_by_id(artist_id)
+
+        artist_info = {
+            'artist_id': artist_id
+        }
+        template = jinja_environment.get_template('templates/output.html')
+        self.response.write(template.render(artist_info))
+
+
+
+
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/listener', ListenerHandler),
     ('/createartist', ArtistHandler),
-    ('/getartist', ArtistPage)
+    ('/getartist', ArtistPage),
+    ('/artist/([0-9]+)', Redirect)
 ], debug=True)
