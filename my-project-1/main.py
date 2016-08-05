@@ -56,7 +56,9 @@ class ListenerHandler(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
         if not user:
-            self.error(500)
+            greeting = ('<a href="%s">Sign in or register</a>.' %
+                        users.create_login_url('/'))
+            self.response.out.write('<html><body>%s</body></html>' % greeting)
             return
         listener_first = self.request.get('first_name')
         listener_last = self.request.get('last_name')
@@ -146,7 +148,9 @@ class ArtistHandler(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
         if not user:
-            self.error(500)
+            greeting = ('<a href="%s">Sign in or register</a>.' %
+                        users.create_login_url('/'))
+            self.response.out.write('<html><body>%s</body></html>' % greeting)
             return
         artist_first = self.request.get('a_first')
         artist_last = self.request.get('a_last')
